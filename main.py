@@ -37,3 +37,18 @@ plt.xlabel('Y')
 plt.ylabel('Z')
 plt.title('YZ positions of the clusters')
 plt.show()
+#Anthony's addition wk 2
+# Three-dimensional scatter plot of the positions of the clusters
+from mpl_toolkits.mplot3d import Axes3D  # enables 3D plotting in matplotlib
+#creating a blank figure 
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d') # creating a subplot with X, Y, Z axes
+
+ax.scatter(harris_one['X'], harris_one['Y'], harris_one['Z']) # inserting values/data into plot/graphing
+#Axis Labels
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_zlabel('Z')
+ax.set_title('3D positions of the clusters')
+
+plt.show()
