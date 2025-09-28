@@ -15,5 +15,12 @@ import matplotlib.pyplot as plt
 # FITS: flexible image transport system which is standard file format for images, data, tables
 from astropy.io import fits
 
+#prints out table
 harris_one = pd.read_csv("HarrisPartI.csv")
 print(harris_one)
+# RA/DEC are the equatorial coordinates
+# L/B are the galactic coordinates
+
+# scatter plot of XY positions of the clusters
+plt.scatter(harris_one['X'], harris_one['Y'])
+plt.show()
