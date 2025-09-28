@@ -21,6 +21,19 @@ print(harris_one)
 # RA/DEC are the equatorial coordinates
 # L/B are the galactic coordinates
 
-# scatter plot of XY positions of the clusters
+# visualising the positions of the clusters
+# scatter plot of XY positions of the clusters, horizontal plane of the milky way
+plt.figure(1)
 plt.scatter(harris_one['X'], harris_one['Y'])
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('XY positions of the clusters')
+plt.show()
+
+plt.figure(2)
+# scatter plot of the YZ poitions of the clusters, vertical plane of the milky way
+plt.scatter(harris_one['Y'], harris_one['Z'])
+plt.xlabel('Y')
+plt.ylabel('Z')
+plt.title('YZ positions of the clusters')
 plt.show()
