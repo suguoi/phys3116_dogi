@@ -17,4 +17,7 @@
 -use metallicities and dynamics to find the sus looking ones
 -not sure how to spot the imposters
 -plot the xyz first so we can see it visually (dynamics)
+-xy and yz plots completed by susan
+-3d plot completed by anthony
 -plot of how many clusters at each metallicity Fe/H (stellar population)
+-histogram completed by andrew
