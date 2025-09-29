@@ -2,16 +2,14 @@
 # importing libraries from michelle's tutorial
 # i guess also trying to see how it works?
 
+# LIBRARIES -----------------------------------------------------------------
 # numpy works with arrays of numbers so we can handle dataset 
 import numpy as np
-
 # some googling says that pandas is good for reading the csv data
 import pandas as pd
-
 # matplotlib- static, animated and interactive visualisations
 # similar to matlab plotting
 import matplotlib.pyplot as plt
-
 # FITS: flexible image transport system which is standard file format for images, data, tables
 from astropy.io import fits
 
@@ -30,13 +28,14 @@ plt.ylabel('Y')
 plt.title('XY positions of the clusters')
 plt.show()
 
-plt.figure(2)
 # scatter plot of the YZ poitions of the clusters, vertical plane of the milky way
+plt.figure(2)
 plt.scatter(harris_one['Y'], harris_one['Z'])
 plt.xlabel('Y')
 plt.ylabel('Z')
 plt.title('YZ positions of the clusters')
 plt.show()
+
 #Anthony's addition wk 2
 # Three-dimensional scatter plot of the positions of the clusters
 from mpl_toolkits.mplot3d import Axes3D  # enables 3D plotting in matplotlib
@@ -50,18 +49,13 @@ ax.set_xlabel('X')
 ax.set_ylabel('Y')
 ax.set_zlabel('Z')
 ax.set_title('3D positions of the clusters')
-
 plt.show()
 
 #Plot histogram of [Fe/H] values distribution form vandenBergh table.
-#Reading the vandenBergh table by using pandas read_csv function.
-import pandas as pd
-vandenBergh = pd.read_csv("/Users/ak/phys3116_dogi-5/vandenBerg_table2.csv")
+#Reading the vandenBergh table
+vandenBergh = pd.read_csv("vandenBerg_table2.csv")
 #Printing the column names to check if the [Fe/H] is successfully inported.
 print(vandenBergh.columns)
-#Trying to plot the histogram
-import matplotlib.pyplot as plt
-
 
 #Trying to plot a (10*10) inch figure.
 plt.figure(figsize=(10,10))
