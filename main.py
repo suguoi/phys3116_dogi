@@ -52,3 +52,24 @@ ax.set_zlabel('Z')
 ax.set_title('3D positions of the clusters')
 
 plt.show()
+
+#Plot histogram of [Fe/H] values distribution form vandenBergh table.
+#Reading the vandenBergh table by using pandas read_csv function.
+import pandas as pd
+vandenBergh = pd.read_csv("/Users/ak/phys3116_dogi-5/vandenBerg_table2.csv")
+#Printing the column names to check if the [Fe/H] is successfully inported.
+print(vandenBergh.columns)
+#Trying to plot the histogram
+import matplotlib.pyplot as plt
+
+
+#Trying to plot a (10*10) inch figure.
+plt.figure(figsize=(10,10))
+#Trying to make the histogram with 20 bins in order to see more details.
+plt.hist(vandenBergh["FeH"], bins=20)
+#Adding title and labels for the histogram.
+plt.xlabel("[Fe/H]")
+plt.ylabel("Number of clusters")
+plt.title("Histogram of [Fe/H] values distribution from vandenBergh table")
+#Plotting the histogram graph.
+plt.show()
