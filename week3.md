@@ -19,4 +19,3 @@
 - plot the hr diagram
 
 ## put notes here as you go
-- uhhhh we were having issues committing because
