@@ -1,6 +1,8 @@
-# Attempting github commit week 2
-# importing libraries from michelle's tutorial
-# i guess also trying to see how it works?
+# GENERAL NOTES -------------------------------------------------------------
+# harrispt1 has all the positions info
+# harrispt3 has the kinematics and structural info
+# krause has cluster popuations
+# vanderberg has populations and evolutionary properties
 
 # LIBRARIES -----------------------------------------------------------------
 # numpy works with arrays of numbers so we can handle dataset 
@@ -8,11 +10,16 @@ import numpy as np
 # some googling says that pandas is good for reading the csv data
 import pandas as pd
 # matplotlib- static, animated and interactive visualisations
-# similar to matlab plotting
+# plt makes the plots
+# colours lets us manage how the data are converted to colours
 import matplotlib.pyplot as plt
+import matplotlib.colors as colours
 # FITS: flexible image transport system which is standard file format for images, data, tables
 from astropy.io import fits
+# this is used for sigfig rounding?
+from math import log10, floor 
 
+# WEEK 2 ----------------------------------------------------------------------------
 #prints out table
 harris_one = pd.read_csv("HarrisPartI.csv")
 print(harris_one)
@@ -66,4 +73,21 @@ plt.xlabel("[Fe/H]")
 plt.ylabel("Number of clusters")
 plt.title("Histogram of [Fe/H] values distribution from vandenBergh table")
 #Plotting the histogram graph.
+plt.show()
+
+# WEEK 3 -------------------------------------------------------------------------------
+
+# putting the ages and metallicities into an array so it can be plotted
+# x axis is age, y axis is metallicity
+ages = vandenBergh['Age'].to_numpy()
+metallicities = vandenBergh['FeH'].to_numpy()
+print("ages:", ages)
+print("metallicities:", metallicities)
+
+# plotting the age/metallicity relation
+plt.figure(3)
+plt.scatter(ages, metallicities, alpha=0.5)
+plt.xlabel('Age')
+plt.ylabel('[Fe/H]')
+plt.title('Age/Metallicity Relation')
 plt.show()
