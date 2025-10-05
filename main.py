@@ -91,3 +91,19 @@ plt.xlabel('Age')
 plt.ylabel('[Fe/H]')
 plt.title('Age/Metallicity Relation')
 plt.show()
+
+# Trying to make a plot with Velocity VS Positions of the clusters.
+# By reading the VanderBergh_table2.csv file.
+vandenBergh = pd.read_csv("vandenBerg_table2.csv")
+# Putting the velocity and postions into an array.
+velocities = vandenBergh['v_e0'].to_numpy() # Y-axis
+positions = vandenBergh['R_G']. to_numpy() # X-axis
+print("velocities:",velocities)
+print("positions:",positions)
+# Plotting the Velocity VS positions of the clusters.
+plt.figure(4)
+plt.scatter(positions, velocities, alpha=0.7)
+plt.xlabel('Galactocentric Distance R_G')
+plt.ylabel('Escape Velocity v_e0')
+plt.title('Velocity VS postions of the clusters')
+plt.show()
