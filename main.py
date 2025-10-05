@@ -97,7 +97,7 @@ plt.show()
 vandenBergh = pd.read_csv("vandenBerg_table2.csv")
 # Putting the velocity and postions into an array.
 velocities = vandenBergh['v_e0'].to_numpy() # Y-axis
-positions = vandenBergh['R_G']. to_numpy() # X-axis
+positions = vandenBergh['R_G'].to_numpy() # X-axis
 print("velocities:",velocities)
 print("positions:",positions)
 # Plotting the Velocity VS positions of the clusters.
@@ -107,3 +107,27 @@ plt.xlabel('Galactocentric Distance R_G')
 plt.ylabel('Escape Velocity v_e0')
 plt.title('Velocity VS postions of the clusters')
 plt.show()
+
+# Velocity dispersion vs Mass plot 
+# Recognises clusters with high internal velocity releative to their mass
+print("Columns in vandenBergh:", list(vandenBergh.columns))
+for col in vandenBergh.columns:
+    print(repr(col))
+vandenBergh.columns = [col.strip() for col in vandenBergh.columns]
+# Column names 
+mass_col = 'Mass (Msun)'
+veldisp_col = 'Sigma_v'
+
+# Creating arrays
+if mass_col in vandenBergh.columns and veldisp_col in vandenBergh.columns:
+    masses = vandenBergh[mass_col].to_numpy()
+    veldisps = vandenBergh[veldisp_col].to_numpy()
+    plt.figure(5)
+    plt.scatter(masses, veldisps, alpha=0.7, color='green')
+    plt.xlabel('Mass')
+    plt.ylabel('Velocity Dispersion')
+    plt.title('Velocity Dispersion vs Mass of the clusters')
+    plt.show()
+else: 
+    print("Could not find the appropriate 'Mass' or 'Velocity Dispersion' columns, Check CSV file for correct column names.")
+
