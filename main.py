@@ -20,6 +20,7 @@ from astropy.io import fits
 from math import log10, floor 
 
 # WEEK 2 ----------------------------------------------------------------------------
+"""
 #prints out table
 harris_one = pd.read_csv("HarrisPartI.csv")
 print(harris_one)
@@ -75,31 +76,45 @@ plt.title("Histogram of [Fe/H] values distribution from vandenBergh table")
 #Plotting the histogram graph.
 plt.show()
 
-# WEEK 3 -------------------------------------------------------------------------------
+""" #  commented out week 2 code
+
+# WEEK 3 + 4 -------------------------------------------------------------------------------
+
+harris_one = pd.read_csv("HarrisPartI.csv")
+vandenBergh = pd.read_csv("vandenBerg_table2.csv")
 
 # putting the ages and metallicities into an array so it can be plotted
 # x axis is age, y axis is metallicity
 ages = vandenBergh['Age'].to_numpy()
 metallicities = vandenBergh['FeH'].to_numpy()
-print("ages:", ages)
-print("metallicities:", metallicities)
+ngc = vandenBergh['#NGC'].to_numpy()
 
 # plotting the age/metallicity relation
 plt.figure(3)
-plt.scatter(ages, metallicities, alpha=0.5)
+plt.scatter(ages, metallicities, alpha=0.7)
 plt.xlabel('Age')
 plt.ylabel('[Fe/H]')
 plt.title('Age/Metallicity Relation')
+
+# labelling each point on the age/metallicity plot with NGC number
+for i, name in enumerate(ngc):
+    plt.text(ages[i], metallicities[i], str(name), fontsize=6)
+
+# messier 4 is 12.2Gyr and -1.1 [Fe/H]
+# messier 71 is 9.5Gyr and -0.8 [Fe/H]
+# i think these are milky way clusters, one is older and one is younger 
+# plot these 2 points and draw a line through them and maybe it a trendline so we can see outliers
+x_line = [12.2, 9.5]       # ages
+y_line = [-1.1, -0.8]  # metallicities
+# plot the line
+plt.plot(x_line, y_line, color='red', linestyle='--')
 plt.show()
 
 # Trying to make a plot with Velocity VS Positions of the clusters.
-# By reading the VanderBergh_table2.csv file.
-vandenBergh = pd.read_csv("vandenBerg_table2.csv")
 # Putting the velocity and postions into an array.
 velocities = vandenBergh['v_e0'].to_numpy() # Y-axis
 positions = vandenBergh['R_G'].to_numpy() # X-axis
-print("velocities:",velocities)
-print("positions:",positions)
+
 # Plotting the Velocity VS positions of the clusters.
 plt.figure(4)
 plt.scatter(positions, velocities, alpha=0.7)
