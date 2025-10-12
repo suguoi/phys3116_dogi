@@ -146,3 +146,29 @@ if mass_col in vandenBergh.columns and veldisp_col in vandenBergh.columns:
 else: 
     print("Could not find the appropriate 'Mass' or 'Velocity Dispersion' columns, Check CSV file for correct column names.")
 
+# Reading the VanderBergh_table2.csv file
+vandenBergh = pd.read_csv("vandenBerg_table2.csv")
+# Extracting the age and metallicity columns
+ages = vandenBergh['Age'].to_numpy()
+metallicities = vandenBergh['FeH'].to_numpy()
+# Plotting a linear regression line between age and metallicity
+# A better way to fit a trendline
+from scipy.stats import linregress
+result = linregress(ages, metallicities)
+print("Slope:", result.slope)
+print("Intercept:", result.intercept)
+# Calculate the pridicted and the residuals values of each cluster
+# Calculating the predicted metallicities based on the regression line
+predicted_metallicities = result.slope * ages + result.intercept
+# Calulating the residuals
+residuals = metallicities - predicted_metallicities
+# Plotting the age/metallicity relation with the regression line
+plt.figure(6)
+plt.scatter(ages, metallicities, alpha=0.5, label='Data Points')
+plt.plot(ages, predicted_metallicities, color='red', label='Regression Line')
+plt.xlabel('Age')
+plt.ylabel('[Fe/H]')
+plt.title('Age/Metallicity Relation with Regression Line')
+plt.legend()
+plt.show()
+# Will do the residuals plot next week.
