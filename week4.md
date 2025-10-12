@@ -23,5 +23,7 @@
 - andrew- velocity vs position
 - label each point too
 - see if theres a trendline 
+- nevermind theres no trendline
+- found a better method of fitting a trendline to the metallicity/age plot
 
 
