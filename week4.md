@@ -26,4 +26,4 @@
 - nevermind theres no trendline
 - found a better method of fitting a trendline to the metallicity/age plot
 
-
+- anthony is having issues with vscode, may not be able to contribute the 3 linnes of code this week
