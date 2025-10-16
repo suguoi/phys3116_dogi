@@ -100,6 +100,7 @@ plt.title('Age/Metallicity Relation')
 for i, name in enumerate(ngc):
     plt.text(ages[i], metallicities[i], str(name), fontsize=6)
 
+""" ## stupid method to fit a trendline
 # messier 4 is 12.2Gyr and -1.1 [Fe/H]
 # messier 71 is 9.5Gyr and -0.8 [Fe/H]
 # i think these are milky way clusters, one is older and one is younger 
@@ -109,13 +110,11 @@ y_line = [-1.1, -0.8]  # metallicities
 # plot the line
 plt.plot(x_line, y_line, color='red', linestyle='--')
 plt.show()
+"""
 
-# Trying to make a plot with Velocity VS Positions of the clusters.
-# Putting the velocity and postions into an array.
+# Plot of velocity vs position
 velocities = vandenBergh['v_e0'].to_numpy() # Y-axis
 positions = vandenBergh['R_G'].to_numpy() # X-axis
-
-# Plotting the Velocity VS positions of the clusters.
 plt.figure(4)
 plt.scatter(positions, velocities, alpha=0.7)
 plt.xlabel('Galactocentric Distance R_G')
