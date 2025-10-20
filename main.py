@@ -165,6 +165,8 @@ residuals = metallicities - predicted_metallicities
 plt.figure(6)
 plt.scatter(ages, metallicities, alpha=0.5, label='Data Points')
 plt.plot(ages, predicted_metallicities, color='red', label='Regression Line')
+eq_text = f"[Fe/H]={result.slope:.2f}*Age+{result.intercept:.2f}"
+plt.text(0.05,0.95,eq_text, transform=plt.gca().transAxes, fontsize=10,)
 plt.xlabel('Age')
 plt.ylabel('[Fe/H]')
 plt.title('Age/Metallicity Relation with Regression Line')

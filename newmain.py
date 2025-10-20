@@ -77,3 +77,20 @@ ax.set_zlabel('Z')
 ax.set_title('3D positions of the clusters')
 fig.colorbar(sc, ax=ax, label='Radial Velocity (km/s)')
 plt.show()
+
+# Read Krause21 data for r_h vs M_star plot --------
+Krause = pd.read_csv("Krause21.csv")
+# putting the half-light radius and stellar mass into arrays so they can be plotted
+r_h = Krause['rh']
+M_star = Krause['Mstar']
+# plotting the r_h vs M_star graph
+plt.figure(4)
+plt.scatter(M_star,r_h,color='red',alpha=0.7,label='Clusters Data')
+# add logarithmic scales to both axes
+plt.xscale('log')
+plt.yscale('log')
+plt.xlabel('Stellar Mass')
+plt.ylabel('Half-light Radius')
+plt.title('Half-light Radius vs Stellar Mass of Clusters')
+plt.legend()
+plt.show()
