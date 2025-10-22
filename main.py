@@ -121,29 +121,27 @@ plt.xlabel('Galactocentric Distance R_G')
 plt.ylabel('Escape Velocity v_e0')
 plt.title('Velocity VS postions of the clusters')
 plt.show()
-
-# Velocity dispersion vs Mass plot 
-# Recognises clusters with high internal velocity releative to their mass
-print("Columns in vandenBergh:", list(vandenBergh.columns))
+#Velocity dispersion vs Mass Plot 
+#To recognise clusters with high internal velocity relative to the luminosity 
+print("Columns in vandenBrgh:", list(vandenBergh.columns))
 for col in vandenBergh.columns:
     print(repr(col))
 vandenBergh.columns = [col.strip() for col in vandenBergh.columns]
-# Column names 
-mass_col = 'Mass (Msun)'
-veldisp_col = 'Sigma_v'
-
-# Creating arrays
-if mass_col in vandenBergh.columns and veldisp_col in vandenBergh.columns:
-    masses = vandenBergh[mass_col].to_numpy()
-    veldisps = vandenBergh[veldisp_col].to_numpy()
+#By using colums: M_V (absolute magnitude) and log_sigma_0 (central velocity dispersion)
+mass_proxy_col = 'M_V' # proxy for mass ( > brightness = > mass(more massive))
+veldisp_log_col = 'log_sigma_0' # log of velocity dispersion
+if mass_proxy_col in vandenBergh.columns and veldisp_log_col in vandenBergh.columns:
+    magnitudes = vandenBergh[mass_proxy_col].to_numpy()
+    veldisp_log = vandenBergh[veldisp_log_col].to_numpy()
     plt.figure(5)
-    plt.scatter(masses, veldisps, alpha=0.7, color='green')
-    plt.xlabel('Mass')
-    plt.ylabel('Velocity Dispersion')
-    plt.title('Velocity Dispersion vs Mass of the clusters')
+    plt.scatter(magnitudes, veldisp_log, alpha=0.7, color='gold')
+    plt.xlabel('Absolute Magnitude M_V')
+    plt.ylabel('log_10( Veoclity Dispersion)')
+    plt.title('Velocity Dispersion VS Luminosity (proxy for mass)')
+    plt.gca().invert_xaxis() # brighter means more larger clusters on the left 
     plt.show()
-else: 
-    print("Could not find the appropriate 'Mass' or 'Velocity Dispersion' columns, Check CSV file for correct column names.")
+else:
+    print(f"Columns '{mass_proxy_col}' or '{veldisp_log_col}' not found in the vandenBergh table.")
 
 # Reading the VanderBergh_table2.csv file
 vandenBergh = pd.read_csv("vandenBerg_table2.csv")
