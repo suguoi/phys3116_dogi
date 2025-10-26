@@ -170,14 +170,13 @@ predicted_metallicities = result.slope * ages + result.intercept
 residuals = metallicities - predicted_metallicities
 # R squared value
 r_squared = result.rvalue**2
-plt.text(0.05,0.90,f"R^2={r_squared:.3f}", transform=plt.gca().transAxes, fontsize=10)
-
 # Plotting the age/metallicity relation with the regression line
 plt.figure(6)
 plt.scatter(ages, metallicities, alpha=0.5, label='Data Points')
 plt.plot(ages, predicted_metallicities, color='red', label='Regression Line')
 eq_text = f"[Fe/H]={result.slope:.2f}*Age+{result.intercept:.2f}"
 plt.text(0.05,0.95,eq_text, transform=plt.gca().transAxes, fontsize=10,)
+plt.text(0.05,0.90,f"R^2={r_squared:.3f}", transform=plt.gca().transAxes, fontsize=10)
 plt.xlabel('Ages')
 plt.ylabel('[Fe/H]')
 plt.title('Age/Metallicity Relation with Regression Line')
