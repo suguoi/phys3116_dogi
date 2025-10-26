@@ -73,8 +73,17 @@ plt.hist(vandenBergh["FeH"], bins=20)
 plt.xlabel("[Fe/H]")
 plt.ylabel("Number of clusters")
 plt.title("Histogram of [Fe/H] values distribution from vandenBergh table")
+# Calculating and printing the mean and median of [Fe/H] values.
+feh_values = vandenBergh["FeH"].dropna() # removing NaN values for accurate calculations
+mean_val = feh_values.mean()
+median_val = feh_values.median()
+# Printing the mean and median values on the histogram
+plt.axvline(mean_val,color="red",lw=2,label=f"Mean:{mean_val:.2f}")
+plt.axvline(median_val,color="blue",lw=2,label=f"Median:{median_val:.2f}")
+plt.legend(loc="best")
 #Plotting the histogram graph.
 plt.show()
+
 
 """ #  commented out week 2 code
 
