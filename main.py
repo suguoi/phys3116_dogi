@@ -130,7 +130,7 @@ plt.xlabel('Galactocentric Distance R_G')
 plt.ylabel('Escape Velocity v_e0')
 plt.title('Velocity VS postions of the clusters')
 plt.show()
-#Velocity dispersion vs Mass Plot 
+#Velocity dispersion vs Luminosity/Mass Plot 
 #To recognise clusters with high internal velocity relative to the luminosity 
 print("Columns in vandenBrgh:", list(vandenBergh.columns))
 for col in vandenBergh.columns:
@@ -142,15 +142,28 @@ veldisp_log_col = 'log_sigma_0' # log of velocity dispersion
 if mass_proxy_col in vandenBergh.columns and veldisp_log_col in vandenBergh.columns:
     magnitudes = vandenBergh[mass_proxy_col].to_numpy()
     veldisp_log = vandenBergh[veldisp_log_col].to_numpy()
-    plt.figure(5)
-    plt.scatter(magnitudes, veldisp_log, alpha=0.7, color='gold')
+    plt.figure(figsize=(8,6))
+    plt.scatter(magnitudes, veldisp_log, alpha=0.7, color='darkblue', s=50, label='Clusters (Data Points)')
     plt.xlabel('Absolute Magnitude M_V')
     plt.ylabel('log_10( Veoclity Dispersion)')
-    plt.title('Velocity Dispersion VS Luminosity (proxy for mass)')
+    plt.title('Velocity Dispersion VS Luminosity')
     plt.gca().invert_xaxis() # brighter means more larger clusters on the left 
+    plt.grid(True, linestyle=':')
+    #  Adds a linear line of regression (Line of bestfit) to the plot
+    coeffs = np.polyfit(magnitudes, veldisp_log, 1 )
+    fit_line = np.poly1d(coeffs)
+    plt.plot(np.sort(magnitudes), fit_line(np.sort(magnitudes)), color='red', linestyle='-', linewidth=2, label='Line of regression')
+    # Equation for line of regression
+    eq_text = f"LReqn:log_sigma_0 = {coeffs[0]:.2f} * M_V + {coeffs[1]:.2f}"
+    plt.text(0.02,0.27,eq_text, transform=plt.gca().transAxes, fontsize=9, verticalalignment='top',bbox=dict(facecolor='white', alpha=0.7))
+    # Lable cluster with highest velocity dispersion
+    max_disp_idx = np.argmax(veldisp_log)
+    plt.text(magnitudes[max_disp_idx], veldisp_log[max_disp_idx], f"#{vandenBergh['#NGC'][max_disp_idx]}", fontsize=10, color='darkgreen')
+    plt.legend()
     plt.show()
 else:
     print(f"Columns '{mass_proxy_col}' or '{veldisp_log_col}' not found in the vandenBergh table.")
+
 
 # Reading the VanderBergh_table2.csv file
 vandenBergh = pd.read_csv("vandenBerg_table2.csv")
