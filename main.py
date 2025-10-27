@@ -145,7 +145,7 @@ if mass_proxy_col in vandenBergh.columns and veldisp_log_col in vandenBergh.colu
     plt.figure(figsize=(8,6))
     plt.scatter(magnitudes, veldisp_log, alpha=0.7, color='darkblue', s=50, label='Clusters (Data Points)')
     plt.xlabel('Absolute Magnitude M_V')
-    plt.ylabel('log_10( Veoclity Dispersion)')
+    plt.ylabel('log_10( Velocity Dispersion)')
     plt.title('Velocity Dispersion VS Luminosity')
     plt.gca().invert_xaxis() # brighter means more larger clusters on the left 
     plt.grid(True, linestyle=':')
