@@ -203,3 +203,42 @@ plt.xlabel('Ages')
 plt.ylabel('Residuals')
 plt.title('Residuals of Age/Metallicity Regression')
 plt.show()
+# Calculating the z-scores of the residuals to identify outliers
+# Adopt a repersent metallicity uncertainty of 0.1 dex
+metallicities_uncertainty = 0.1
+# Estabilish an array of metallicity uncertainties
+feh_errors = np.full_like(metallicities, metallicities_uncertainty)
+# Age uncertainties
+Age_err = vandenBergh['Age_err'].to_numpy()
+# Age uncertainties through the regression line slope to Fe/H 
+sigma_age_to_feh = np.abs(result.slope)*Age_err
+# Total uncertainties in Fe/H
+sigma_total = np.sqrt(feh_errors**2+sigma_age_to_feh**2)
+# Z-scores of the residuals
+z_scores = residuals / sigma_total
+# Identifying outliers with z < -2
+outliers = np.where(z_scores < -2)[0]
+print("Outliers clusters (z < -2):")
+columns_to_display = ['#NGC','Name','Age','FeH','Age_err','Z-score']
+# `outliers` is an array of integer indices (numpy.ndarray), it does not have `.columns`.
+# Create a copy of the DataFrame (or add a column) so we can show the requested columns + Z-score.
+vdb = vandenBergh.copy()
+# Ensure we have a Z-score column (aligning shapes and preserving NaNs)
+vdb['Z-score'] = z_scores
+
+# Select only the rows that are outliers (z < -2) and the columns we want to display.
+# Use .loc with a boolean mask so it works even if some columns are missing.
+mask_outliers = vdb['Z-score'] < -2
+existing_cols = [col for col in columns_to_display if col in vdb.columns]
+print(vdb.loc[mask_outliers, existing_cols])
+
+#Plotting A histogram of the Z-scores to visualise their distribution
+plt.figure(8)
+plt.hist(z_scores, bins=30, color='purple',alpha=0.7)
+plt.xlabel('Z-score')
+plt.ylabel('Number of clusters')
+plt.title('Histogram of Z-scores')
+plt.axvline(-2,color="red",lw=2,label="Outlier Threshold (z=-2)")
+print("Number of outlier clusters (z < -2):", np.sum(z_scores < -2))
+plt.legend()
+plt.show()
